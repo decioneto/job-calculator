@@ -29,7 +29,21 @@ const jobs = [
     },
 ]
 
-routes.get('/', (req, res) => res.render(views + "index"))
+routes.get('/', (req, res) => {
+
+    const updatedJobs = jobs.map((job) => {
+        const remainingDays = (job["total-hours"] / job["daily-hours"]).toFixed()
+        const createdDate = new Date(job.created_at)
+        const dueDay = createdDate.getDate() + Number(remainingDays)
+        const durDate = createdDate.setDate
+
+        return job
+    })
+    
+    
+    return res.render(views + "index", { jobs })
+
+})
 routes.get('/job', (req, res) => res.render(views + "job"))
 routes.post('/job', (req, res) => {
     
